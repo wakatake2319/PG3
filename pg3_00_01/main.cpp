@@ -8,23 +8,24 @@
 using namespace std;
 
 
-template<typename T> 
-T Min(T a, T b) {
-	if (a > b) {
-		return static_cast<double>(b);
-	} else {
-		return static_cast<double>(a);
-	}
-}
 
+int Recursive(int kyuuryou, int zikan, int kotei) {
+	if (kyuuryou >= kotei) {
+		printf("%d時間後に超える", zikan);
+		return zikan;
+	}
+	printf("%d時間 |  %d　%d\n", zikan,kyuuryou, kotei);
+	kyuuryou = kyuuryou * 2 - 50;
+
+	return (Recursive(kyuuryou, ++zikan, kotei +1226));
+}
 
 int main() {
 
-	//計算と結果出力
-	printf("%d\n", Min<int>(128, 256));
-	printf("%f\n", Min<float>(52.5f, 55.0f));
-	printf("%lf\n", Min<double>(3.14159265, 2.7182818281));
+	int saiki = 100;
+	int ippan = 1226;
+	int zikan = 1;
+	int resullt1 = Recursive(saiki, zikan, ippan);
 
 	return 0;
-
 }
