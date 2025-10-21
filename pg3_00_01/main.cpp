@@ -5,27 +5,50 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <stdlib.h>
+#include <time.h>
+
 using namespace std;
 
 
 
-int Recursive(int kyuuryou, int zikan, int kotei) {
-	if (kyuuryou >= kotei) {
-		printf("%d時間後に超える", zikan);
-		return zikan;
-	}
-	printf("%d時間 |  %d　%d\n", zikan,kyuuryou, kotei);
-	kyuuryou = kyuuryou * 2 - 50;
+// コールバック関数のプロトタイプ宣言
+/*型として定義*/ void (*Callback)(int result);
 
-	return (Recursive(kyuuryou, ++zikan, kotei +1226));
+// サイコロの出目を決定する関数
+int roll_dice() { return rand() % 6 + 1; }
+
+// 判定を行うコールバック関数
+void judge_result(int result) {
+
+	int input;
+
+	printf("サイコロの出目が奇数(1)か偶数(0)か入力:");
+	scanf_s("%d", &input);
+
+	printf("判定中...\n");
+
+	Sleep(3000);
+
+	if ((result % 2 == 1 && input == 1) || (result % 2 == 0 && input == 0)) {
+		printf("正解\n");
+	} else {
+		printf("不正解\n");
+	}
+
+	printf("サイコロの目は%d\n", result);
 }
 
+// メイン関数
 int main() {
 
-	int saiki = 100;
-	int ippan = 1226;
-	int zikan = 1;
-	int resullt1 = Recursive(saiki, zikan, ippan);
+	srand((int)time(NULL));
+
+	int dice_result = roll_dice();
+
+	Callback = judge_result;
+
+	Callback(dice_result);
 
 	return 0;
 }
