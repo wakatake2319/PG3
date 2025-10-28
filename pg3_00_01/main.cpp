@@ -13,7 +13,7 @@ using namespace std;
 
 
 // コールバック関数のプロトタイプ宣言
-/*型として定義*/ void (*Callback)(int result);
+typedef void (*Callback)(int result);
 
 // サイコロの出目を決定する関数
 int roll_dice() { return rand() % 6 + 1; }
@@ -46,9 +46,9 @@ int main() {
 
 	int dice_result = roll_dice();
 
-	Callback = judge_result;
+	Callback callback = judge_result;
 
-	Callback(dice_result);
+	callback(dice_result);
 
 	return 0;
 }
